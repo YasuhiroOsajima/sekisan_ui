@@ -1,21 +1,25 @@
 <template>
   <div>
+
     <v-toolbar dark color="indigo">
       <v-toolbar-title class="white--text">My Todo</v-toolbar-title>
     </v-toolbar>
+
     <v-list>
-      <template v-for="(todo, i) in todos">
-        <v-list-tile v-bind:key="i">
+      <template v-for="(todo, idx) in todos">
+        <v-list-tile v-bind:key="idx + '-todo'">
           <v-list-tile-content>
             {{ todo }}
           </v-list-tile-content>
+
           <v-list-tile-action>
-            <v-btn flat icon v-on:click="deleteTodo(i)">
+            <v-btn flat icon v-on:click="deleteTodo(idx)">
               <v-icon>delete</v-icon>
             </v-btn>
           </v-list-tile-action>
         </v-list-tile>
-        <v-divider v-bind:key="i"></v-divider>
+
+        <v-divider v-bind:key="idx + '-div'"></v-divider>
       </template>
     </v-list>
 
@@ -24,33 +28,35 @@
         <v-icon color="white">add</v-icon>
       </v-btn>
     </div>
+
   </div>
 </template>
 
 <script>
 export default {
   data() {
-      return {
-        todos: []
-      }
+    return {
+      todos: []
+    };
   },
   created() {
-      this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+    this.todos = this.$store.getters.values;
+    //this.todos = JSON.parse(localStorage.getItem("todos")) || [];
   },
   methods: {
-    deleteTodo(i) {
-      this.todos.splice(i, 1);
-      localStorage.setItem('todos', JSON.stringify(this.todos));
+    deleteTodo(idx) {
+      this.todos.splice(idx, 1);
+      this.$store.commit("setValues", this.todos);
+      //localStorage.setItem("todos", JSON.stringify(this.todos));
     },
     addTodo() {
-      this.$router.push('/todos/add');
+      this.$router.push("/todos/add");
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
 .bottom-right {
   position: fixed;
   bottom: 0px;
