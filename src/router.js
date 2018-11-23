@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import TodoList from './components/TodoList'
-import TodoForm from './components/TodoForm'
+import Vue from "vue";
+import Router from "vue-router";
+import TodoList from "./components/TodoList";
+import TodoForm from "./components/TodoForm";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: "/",
       component: TodoList
     },
     {
-      path: '/todos/add',
+      path: "/todos/add",
       component: TodoForm
     }
   ]
-})
+});
