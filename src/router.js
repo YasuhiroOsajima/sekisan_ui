@@ -6,16 +6,16 @@ import TodoForm from "./components/TodoForm";
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: "/",
-      component: TodoList
-    },
-    {
-      path: "/todos/add",
-      component: TodoForm
-    }
-  ]
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: "/",
+            component: TodoList
+        },
+        {
+            path: "/todos/add",
+            component: TodoForm
+        }
+    ]
 });
