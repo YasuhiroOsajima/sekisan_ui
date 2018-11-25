@@ -24,10 +24,10 @@
             addTodo() {
                 if (this.newTodo === "") return;
 
-                //const todos = JSON.parse(localStorage.getItem("todos")) || [];
+                //const sekisan = JSON.parse(localStorage.getItem("sekisan")) || [];
                 const todos = this.$store.getters.values;
                 todos.push(this.newTodo);
-                //localStorage.setItem("todos", JSON.stringify(todos));
+                //localStorage.setItem("sekisan", JSON.stringify(sekisan));
                 this.$store.commit("setValues", todos);
                 this.newTodo = "";
                 this.$router.push("/");

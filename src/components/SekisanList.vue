@@ -2,21 +2,15 @@
     <div>
 
         <v-toolbar dark color="indigo">
-            <v-toolbar-title class="white--text">My Todo</v-toolbar-title>
+            <v-toolbar-title class="white--text">Sekisan List</v-toolbar-title>
         </v-toolbar>
 
         <v-list>
-            <template v-for="(todo, idx) in todos">
+            <template v-for="(seki, idx) in sekisan">
                 <v-list-tile v-bind:key="idx + '-todo'">
                     <v-list-tile-content>
-                        {{ todo }}
+                        {{ seki }}
                     </v-list-tile-content>
-
-                    <v-list-tile-action>
-                        <v-btn flat icon v-on:click="deleteTodo(idx)">
-                            <v-icon>delete</v-icon>
-                        </v-btn>
-                    </v-list-tile-action>
                 </v-list-tile>
 
                 <v-divider v-bind:key="idx + '-div'"></v-divider>
@@ -40,17 +34,22 @@
             };
         },
         created() {
-            this.todos = this.$store.getters.values;
-            //this.sekisan = JSON.parse(localStorage.getItem("sekisan")) || [];
+            this.sekisan = this.$store.getters.values;
         },
         methods: {
             deleteTodo(idx) {
                 this.sekisan.splice(idx, 1);
                 this.$store.commit("setValues", this.sekisan);
-                //localStorage.setItem("sekisan", JSON.stringify(this.sekisan));
             },
             addTodo() {
-                this.$router.push("/sekisan/add");
+                console.log("debug");
+                const headers = {'Access-Control-Allow-Origin': '*'};
+                this.$axios.get('http://127.0.0.1:5000/sekisan', {headers})
+                    .then(response => (this.sekisan = response))
+                    .catch(error => console.log(error))
+
+                //this.$store.commit("setValues", this.sekisan);
+                //this.$router.push("/sekisan");
             }
         }
     };
