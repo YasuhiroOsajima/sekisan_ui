@@ -1,24 +1,26 @@
 <template>
     <div>
-
         <v-toolbar dark color="indigo">
-            <v-toolbar-title class="white--text">Sekisan List</v-toolbar-title>
+            <v-toolbar-title class="white--text"> Sekisan List </v-toolbar-title>
         </v-toolbar>
 
         <v-list>
             <template v-for="(seki, idx) in sekisan">
                 <v-list-tile v-bind:key="idx + '-seki'">
                     <v-list-tile-content>
-                        <div>{{ seki.id }}</div>
-                        <div>{{ seki.employee_num }}</div>
-                        <div>{{ seki.sekisan }}</div>
+                        <v-list-tile-title> {{ seki.id }} </v-list-tile-title>
+                    </v-list-tile-content>
+                    <v-list-tile-content>
+                        <v-list-tile-title> {{ seki.employee_num }} </v-list-tile-title>
+                    </v-list-tile-content>
+                    <v-list-tile-content>
+                        <v-list-tile-title> {{ seki.sekisan }} </v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
 
                 <v-divider v-bind:key="idx + '-div'"></v-divider>
             </template>
         </v-list>
-
     </div>
 </template>
 
