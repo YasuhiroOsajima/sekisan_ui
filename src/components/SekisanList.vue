@@ -7,21 +7,17 @@
 
         <v-list>
             <template v-for="(seki, idx) in sekisan">
-                <v-list-tile v-bind:key="idx + '-todo'">
+                <v-list-tile v-bind:key="idx + '-seki'">
                     <v-list-tile-content>
-                        {{ seki }}
+                        <div>{{ seki.id }}</div>
+                        <div>{{ seki.employee_num }}</div>
+                        <div>{{ seki.sekisan }}</div>
                     </v-list-tile-content>
                 </v-list-tile>
 
                 <v-divider v-bind:key="idx + '-div'"></v-divider>
             </template>
         </v-list>
-
-        <div class="bottom-right">
-            <v-btn fab color="indigo" v-on:click="addTodo">
-                <v-icon color="white">add</v-icon>
-            </v-btn>
-        </div>
 
     </div>
 </template>
@@ -35,6 +31,7 @@
         },
         created() {
             this.sekisan = this.$store.getters.values;
+            this.addTodo()
         },
         methods: {
             deleteTodo(idx) {
@@ -44,11 +41,13 @@
             addTodo() {
                 console.log("debug");
                 this.$axios.get('http://127.0.0.1:5000/sekisan')
-                    .then(response => (this.sekisan = response))
+                    .then(response => {
+                        console.log(response.data['Sekisan']);
+                        this.sekisan = response.data['Sekisan'];
+                        this.$store.commit("setValues", this.sekisan);
+                    })
                     .catch(error => console.log(error))
 
-                //this.$store.commit("setValues", this.sekisan);
-                //this.$router.push("/sekisan");
             }
         }
     };
