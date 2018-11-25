@@ -43,8 +43,7 @@
             },
             addTodo() {
                 console.log("debug");
-                const headers = {'Access-Control-Allow-Origin': '*'};
-                this.$axios.get('http://127.0.0.1:5000/sekisan', {headers})
+                this.$axios.get('http://127.0.0.1:5000/sekisan')
                     .then(response => (this.sekisan = response))
                     .catch(error => console.log(error))
 

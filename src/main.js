@@ -9,6 +9,8 @@ import axios from 'axios'
 Vue.config.productionTip = false;
 
 Vue.prototype.$axios = axios;
+Vue.prototype.$axios.defaults.withCredentials = true;
+Vue.prototype.$axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
 
 new Vue({
     router,
